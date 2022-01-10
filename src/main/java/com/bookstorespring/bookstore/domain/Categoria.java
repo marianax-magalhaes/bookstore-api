@@ -1,17 +1,26 @@
 package com.bookstorespring.bookstore.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-public class Categoria {
+public class Categoria implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private String descricao;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
     private List<Livro> livros = new ArrayList<>();
+
 
     public Categoria() {
         super();
